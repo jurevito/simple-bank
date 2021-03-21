@@ -13,23 +13,17 @@ namespace BankAPI.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private readonly MockAccount repo;
+        private readonly SqlRepo repo;
 
-        public AccountsController(MockAccount repository)
+        public AccountsController(SqlRepo repository)
         {
             repo = repository;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Account> GetAccountById(int id)
-        {
-            return Ok(repo.GetAccountById(id));
-        }
+        public ActionResult<Account> GetAccountById(int id) => Ok(repo.GetAccountById(id));
 
         [HttpGet]
-        public ActionResult<IEnumerable<Account>> GetAccounts()
-        {
-            return Ok(repo.GetAccounts());
-        }
+        public ActionResult<IEnumerable<Account>> GetAccounts() => Ok(repo.GetAccounts());
     }
 }
