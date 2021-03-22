@@ -33,6 +33,7 @@ namespace BankAPI
 
             services.AddControllers();
             services.AddScoped<SqlRepo>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
         }
 

@@ -15,6 +15,16 @@ namespace BankAPI.Data
             _context = context;
         }
 
+        public void CreateAccount(Account account)
+        {
+            if(account == null)
+            {
+                throw new ArgumentNullException(nameof(account));
+            }
+
+            _context.Accounts.Add(account);
+        }
+
         public Account GetAccountById(int id)
         {
             return _context.Accounts.FirstOrDefault(p => p.Id == id);
@@ -23,6 +33,11 @@ namespace BankAPI.Data
         public IEnumerable<Account> GetAccounts()
         {
             return _context.Accounts.ToList();
+        }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() >= 0;
         }
     }
 }

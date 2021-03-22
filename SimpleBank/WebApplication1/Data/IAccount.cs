@@ -8,7 +8,9 @@ namespace BankAPI.Data
 {
     public interface IAccount
     {
+        bool SaveChanges();
         Account GetAccountById(int id);
         IEnumerable<Account> GetAccounts();
+        void CreateAccount(Account account);
     }
 }
