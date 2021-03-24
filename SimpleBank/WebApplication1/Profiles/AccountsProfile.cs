@@ -14,6 +14,8 @@ namespace BankAPI.Profiles
         {
             CreateMap<Account, AccountReadDTO>();
             CreateMap<AccountCreateDTO, Account>();
+            CreateMap<AccountUpdateDTO, Account>();
+            CreateMap<Account, AccountUpdateDTO>();
         }
     }
 }

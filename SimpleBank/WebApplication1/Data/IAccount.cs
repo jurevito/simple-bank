@@ -12,5 +12,7 @@ namespace BankAPI.Data
         Account GetAccountById(int id);
         IEnumerable<Account> GetAccounts();
         void CreateAccount(Account account);
+        void UpdateAccount(Account account);
+        void DeleteAccount(Account account);
     }
 }

@@ -3,6 +3,7 @@ using BankAPI.Data;
 using BankAPI.Dto;
 using BankAPI.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,52 @@ namespace BankAPI.Controllers
                 new { accountReadDTO.Id }, 
                 accountReadDTO
             );
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateAccount(int id, AccountUpdateDTO accountDTO) 
+        {
+            var accountModel = _repository.GetAccountById(id);
+            if (accountModel == null) return NotFound();
+
+            _mapper.Map(accountDTO, accountModel);
+            _repository.UpdateAccount(accountModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public ActionResult PatchAccount(int id, JsonPatchDocument<AccountUpdateDTO> patchDoc)
+        {
+            var accountModel = _repository.GetAccountById(id);
+            if(accountModel == null) return NotFound();
+
+            var accountToPatch = _mapper.Map<AccountUpdateDTO>(accountModel);
+            patchDoc.ApplyTo(accountToPatch, ModelState);
+
+            if(!TryValidateModel(accountToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(accountToPatch, accountModel);
+            _repository.UpdateAccount(accountModel);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteAccount(int id)
+        {
+            var accountModel = _repository.GetAccountById(id);
+            if (accountModel == null) return NotFound();
+
+            _repository.DeleteAccount(accountModel);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

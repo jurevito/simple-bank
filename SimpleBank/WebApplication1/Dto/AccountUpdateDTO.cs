@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankAPI.Dto
 {
-    public class AccountCreateDTO
+    public class AccountUpdateDTO
     {
         [Required]
         public string Name { get; set; }
