@@ -48,6 +48,8 @@ namespace BankAPI.Controllers
             var senderModel = _accountRepo.GetAccountById(transferModel.SenderID);
             var receiverModel = _accountRepo.GetAccountById(transferModel.ReceiverID);
 
+            transferModel.Amount = Math.Round(transferModel.Amount, 2);
+
             if (senderModel == null)
             {
                 return Problem("Sender doesn't exist.", default, 400, "Bad transfer request.");
@@ -66,8 +68,10 @@ namespace BankAPI.Controllers
             senderModel.Balance -= transferModel.Amount;
             receiverModel.Balance += transferModel.Amount;
 
-            DateTime currentTime = DateTime.UtcNow;
-            transferModel.TimeStamp = currentTime;
+            senderModel.Balance = Math.Round(senderModel.Balance, 2);
+            receiverModel.Balance = Math.Round(receiverModel.Balance, 2);
+
+            transferModel.TimeStamp = DateTime.UtcNow;
 
             _transferRepo.MakeTransfer(transferModel, senderModel, receiverModel);
             var transferReadDTO = _mapper.Map<TransferReadDTO>(transferModel);
