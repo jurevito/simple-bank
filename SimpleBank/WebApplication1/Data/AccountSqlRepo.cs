@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BankAPI.Data
 {
-    public class SqlRepo : IAccount
+    public class AccountSqlRepo : IAccount
     {
         private readonly BankContext _context;
 
-        public SqlRepo(BankContext context) 
+        public AccountSqlRepo(BankContext context) 
         {
             _context = context;
         }

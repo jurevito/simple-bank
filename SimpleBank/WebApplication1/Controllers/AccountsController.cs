@@ -16,10 +16,10 @@ namespace BankAPI.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private readonly SqlRepo _repository;
+        private readonly AccountSqlRepo _repository;
         private readonly IMapper _mapper;
 
-        public AccountsController(SqlRepo repository, IMapper mapper)
+        public AccountsController(AccountSqlRepo repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -51,8 +51,8 @@ namespace BankAPI.Controllers
             var accountReadDTO = _mapper.Map<AccountReadDTO>(accountModel);
 
             return CreatedAtRoute(
-                nameof(GetAccountById), 
-                new { accountReadDTO.Id }, 
+                nameof(GetAccountById),
+                new { accountReadDTO.Id },
                 accountReadDTO
             );
         }

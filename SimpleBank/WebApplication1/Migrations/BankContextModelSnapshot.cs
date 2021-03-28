@@ -38,7 +38,7 @@ namespace BankAPI.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("BankAPI.Models.Transaction", b =>
+            modelBuilder.Entity("BankAPI.Models.Transfer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,14 +54,12 @@ namespace BankAPI.Migrations
                     b.Property<int>("SenderID")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("TimeStamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transfers");
                 });
 #pragma warning restore 612, 618
         }

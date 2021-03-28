@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankAPI.Models
 {
-    public class Transaction
+    public class Transfer
     {
         [Key]
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace BankAPI.Models
         [Required]
         public double Amount { get; set; }
 
-        [Timestamp]
-        public byte[] TimeStamp { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime TimeStamp { get; set; }
     }
 }

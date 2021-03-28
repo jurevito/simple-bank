@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BankAPI.Migrations
 {
-    public partial class NameInitialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,7 +22,7 @@ namespace BankAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transactions",
+                name: "Transfers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -30,11 +30,11 @@ namespace BankAPI.Migrations
                     SenderID = table.Column<int>(type: "int", nullable: false),
                     ReceiverID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
-                    TimeStamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.PrimaryKey("PK_Transfers", x => x.Id);
                 });
         }
 
@@ -44,7 +44,7 @@ namespace BankAPI.Migrations
                 name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "Transactions");
+                name: "Transfers");
         }
     }
 }

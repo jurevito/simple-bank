@@ -15,6 +15,6 @@ namespace BankAPI.Data
         }
 
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
     }
 }

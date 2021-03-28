@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BankAPI.Dto
 {
-    public class TransactionReadDTO
+    public class TransferCreateDTO
     {
-        public int Id { get; set; }
+        [Required]
         public int SenderID { get; set; }
+
+        [Required]
         public int ReceiverID { get; set; }
+
+        [Required]
         public double Amount { get; set; }
-        public byte[] TimeStamp { get; set; }
     }
 }

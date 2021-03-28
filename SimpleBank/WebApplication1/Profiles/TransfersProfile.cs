@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace BankAPI.Profiles
 {
-    public class TransactionsProfile : Profile
+    public class TransfersProfile : Profile
     {
-        public TransactionsProfile()
+        public TransfersProfile()
         {
-            CreateMap<Transaction, TransactionReadDTO>();
+            CreateMap<Transfer, TransferReadDTO>();
+            CreateMap<TransferCreateDTO, Transfer>();
         }
     }
 }
